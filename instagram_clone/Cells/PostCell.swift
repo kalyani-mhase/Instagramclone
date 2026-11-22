@@ -15,4 +15,5 @@ class PostCell: UICollectionViewCell {
         // Initialization code
     }
 
+    @IBOutlet weak var postImg: UIImageView!
 }

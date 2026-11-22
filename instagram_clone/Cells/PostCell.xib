@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PostCell" customModule="Practice_App" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PostCell" customModule="instagram_clone" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -37,6 +37,9 @@
                 <constraint firstItem="XqA-aJ-BVy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="zOF-UJ-7oa"/>
             </constraints>
             <size key="customSize" width="441" height="340"/>
+            <connections>
+                <outlet property="postImg" destination="XqA-aJ-BVy" id="iwa-nF-egt"/>
+            </connections>
             <point key="canvasLocation" x="312.21374045801525" y="111.26760563380282"/>
         </collectionViewCell>
     </objects>

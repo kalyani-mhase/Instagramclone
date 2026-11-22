@@ -10,7 +10,8 @@ import UIKit
 class HomeViewController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var topBar: TopNavigationBar!
-    let users: [User] = [User(name: "Kalyani", address: "Wagholi, Pune, MH", mob_number: "9518352333", storyData: [StoryData(image: "person",isView: false),StoryData(image: "perosn",isView: false)]),User(name: "Tushar", address: "Airoli, Navi mumbai, MH", mob_number: "9168168012",storyData:[StoryData(image: "person",isView: false),StoryData(image: "perosn",isView: false)])]
+    private let viewModel = HomeViewmodel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tblView.delegate = self
@@ -19,12 +20,25 @@ class HomeViewController: UIViewController {
         self.tblView.register(UINib(nibName: "UserPostCell", bundle: nil), forCellReuseIdentifier: "UserPostCell")
         topBar.topHeader.text = "Instagram"
         tblView.contentInset = .zero
-
         tblView.scrollIndicatorInsets = .zero
-
         tblView.contentInsetAdjustmentBehavior = .never
-
         tblView.sectionHeaderTopPadding = 0
+    }
+    
+    @IBAction func homePressed(_ sender: Any) {
+    }
+    
+    @IBAction func seeProfile(_ sender: Any) {
+    }
+    
+    
+    @IBAction func wathcReels(_ sender: Any) {
+    }
+    
+    @IBAction func searchPressed(_ sender: Any) {
+    }
+    
+    @IBAction func addContained(_ sender: Any) {
     }
     
 }
@@ -38,27 +52,42 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 10
+            return DataSource.users.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if let cell = tblView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as?  UserCell {
-                cell.nameLbl.text = users[indexPath.row%users.count].name ?? ""
-                cell.addressLbl.text = users[indexPath.row%users.count].address ?? ""
-                cell.mobNumerLbl.text = users[indexPath.row%users.count].mob_number ?? ""
-                cell.stodyData = users[indexPath.row%users.count].storyData
+                cell.nameLbl.text = viewModel.users[indexPath.row].name ?? ""
+                cell.addressLbl.text = viewModel.users[indexPath.row].address ?? ""
+                cell.mobNumerLbl.text = viewModel.users[indexPath.row].mob_number ?? ""
+                cell.stodyData = viewModel.users[indexPath.row].storyData
                 cell.cellOnTap = { [weak self] imageName  in
                     self?.preView(img: imageName)
                 }
+                
                 return cell
             }
         } else{
             if let cell = tblView.dequeueReusableCell(withIdentifier: "UserPostCell", for: indexPath) as?  UserPostCell {
+                cell.post = DataSource.users[indexPath.row]
+                cell.onFavoriteAction = {
+                    DataSource.users[indexPath.row].isLike = !(DataSource.users[indexPath.row].isLike)
+                    self.reloadRow(indexPath: [indexPath])
+                }
+                cell.onBookMarkAction = {
+                    DataSource.users[indexPath.row].isBookMark = !(DataSource.users[indexPath.row].isBookMark)
+                    self.reloadRow(indexPath: [indexPath])
+                }
+                
+                cell.setupUI()
                 return cell
             }
         }
         return UITableViewCell()
+    }
+    func reloadRow(indexPath: [IndexPath]) {
+        self.tblView.reloadRows(at: indexPath, with: .none)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
