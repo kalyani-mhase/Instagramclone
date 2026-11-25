@@ -173,6 +173,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="usernameLabel" destination="WsX-Fi-Wx3" id="yN3-km-uS1"/>
                 <outlet property="bookMarkOutlet" destination="dgG-tM-MMt" id="KYj-6m-Sq8"/>
                 <outlet property="commentOutlet" destination="Eg7-1G-320" id="iaY-vb-Trg"/>
                 <outlet property="favoriteOutlet" destination="SEt-a9-et8" id="UCj-v0-Q2E"/>

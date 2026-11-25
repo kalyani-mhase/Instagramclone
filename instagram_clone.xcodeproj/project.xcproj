@@ -32,6 +32,9 @@
         { "path": "<PRODUCTS>/instagram_clone.app", "id": "1F7A8FEF30B2F179001FC317", "type": "wrapper.application", "index": false },
       ],
     },
+    { "kind": "folder", "path": "Domain", "target-membership": [ "instagram_clone" ] },
+    { "kind": "folder", "path": "Data", "target-membership": [ "instagram_clone" ] },
+    { "kind": "folder", "path": "Presentation", "target-membership": [ "instagram_clone" ] },
   ],
   "targets": [
     {

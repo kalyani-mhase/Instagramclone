@@ -9,9 +9,6 @@ import UIKit
 
 class UserCell: UITableViewCell {
 
-    @IBOutlet weak var nameLbl: UILabel!
-    @IBOutlet weak var addressLbl: UILabel!
-    @IBOutlet weak var mobNumerLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var stodyData: [StoryData] = []
     var cellOnTap: ((String) -> Void)?
@@ -41,14 +38,20 @@ class UserCell: UITableViewCell {
 }
 extension UserCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DataSource.users.count
+        stodyData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as? CollectionViewCell {
 //            cell.ibl.text = "Demo CollectionView"
-            cell.img.image = UIImage(named: "person") ?? UIImage(systemName: "circle.fill")
-            if stodyData[indexPath.row%stodyData.count].isView  ?? false{
+            guard stodyData.indices.contains(indexPath.item) else {
+                return cell
+            }
+
+            let story = stodyData[indexPath.item]
+            cell.img.image = UIImage(named: story.image ?? "person") ?? UIImage(systemName: "circle.fill")
+            cell.storyName = story.name
+            if story.isView ?? false {
                 cell.storyView.layer.borderColor = UIColor.gray.cgColor
             } else {
                 cell.storyView.layer.borderColor = UIColor.purple.cgColor
@@ -60,9 +63,10 @@ extension UserCell: UICollectionViewDataSource, UICollectionViewDelegate {
         return UICollectionViewCell()
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        stodyData[indexPath.row%stodyData.count].isView = true
+        guard stodyData.indices.contains(indexPath.item) else { return }
+        stodyData[indexPath.item].isView = true
         self.collectionView.reloadData()
-        self.cellOnTap?(stodyData[indexPath.row%stodyData.count].image ?? "")
+        self.cellOnTap?(stodyData[indexPath.item].image ?? "")
         
     }
     

@@ -1,0 +1,16 @@
+enum AppImages {
+    static let bookmark_fill = "bookmark_fill"
+    static let bookMark = "bookMark"
+    static let comment = "comment"
+    static let favourite = "favourite"
+    static let send = "send"
+    static let heart = "heart"
+    static let home = "home"
+    static let more = "more"
+    static let person = "person"
+    static let reel = "reel"
+    static let search = "search"
+    static let three_dot = "three_dot"
+    static let user = "user"
+    static let share = "share"
+}
